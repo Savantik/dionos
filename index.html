@@ -15,7 +15,7 @@
   --text:#e8ecf0;--muted:#6b7380;--border:#2a3040;
 }
 html{font-size:15px;scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:"Jost",sans-serif;min-height:100vh;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:"Jost",sans-serif;min-height:100vh}
 
 /* NAV */
 #nav{background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none;scroll-behavior:smooth}
@@ -176,7 +176,7 @@ tr:hover td{background:rgba(255,255,255,.025)}
 .export-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 
 /* MACROS */
-.meal-block{background:var(--bg2);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;overflow:hidden}
+.meal-block{background:var(--bg2);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;overflow:visible}
 .meal-header{background:var(--bg3);padding:10px 16px;font-family:"Bebas Neue",sans-serif;letter-spacing:1.5px;font-size:1rem;color:var(--cyan);display:flex;align-items:center;justify-content:space-between}
 .meal-table{width:100%;border-collapse:collapse;font-size:.8rem}
 .meal-table th{background:var(--bg4);color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.4px;padding:6px 8px;border-bottom:1px solid var(--border)}
@@ -235,7 +235,7 @@ tr:hover td{background:rgba(255,255,255,.025)}
 .search-row{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end;margin-bottom:12px}
 
 /* SCROLL limit */
-.tbl-scroll{max-height:65vh;overflow-y:auto}
+.tbl-scroll{max-height:65vh;overflow-y:auto;overflow-x:auto}
 .tbl-scroll::-webkit-scrollbar{width:6px}
 .tbl-scroll::-webkit-scrollbar-track{background:var(--bg2)}
 .tbl-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
@@ -977,7 +977,7 @@ function renderMeals(){
   for(var m=0;m<state.mealCount;m++){
     var mIdx=m;
     html+="<div class=\"meal-block\"><div class=\"meal-header\">Meal "+(m+1)+"<span id=\"meal-kcal-"+m+"\" style=\"font-size:.85rem;color:var(--lime)\"></span></div>";
-    html+="<table class=\"meal-table\"><thead><tr><th>#</th><th>Food</th><th>Grams</th><th>Kcal</th><th>Protein</th><th>Carbs</th><th>Fat</th><th>Fiber</th><th>Sodium</th></tr></thead><tbody>";
+    html+="<div class=\"tbl-wrap\"><table class=\"meal-table\"><thead><tr><th>#</th><th>Food</th><th>Grams</th><th>Kcal</th><th>Protein</th><th>Carbs</th><th>Fat</th><th>Fiber</th><th>Sodium</th></tr></thead><tbody>";
     for(var r=0;r<8;r++){
       var rIdx=r;
       var item=state.meals[m][r];
@@ -996,7 +996,7 @@ function renderMeals(){
       html+="</tr>";
     }
     html+="<tr class=\"meal-total\"><td colspan=\"2\">Meal Total</td><td id=\"mt-g-"+m+"\"></td><td id=\"mt-kcal-"+m+"\"></td><td id=\"mt-prot-"+m+"\"></td><td id=\"mt-carb-"+m+"\"></td><td id=\"mt-fat-"+m+"\"></td><td id=\"mt-fib-"+m+"\"></td><td id=\"mt-sod-"+m+"\"></td></tr>";
-    html+="</tbody></table></div>";
+    html+="</tbody></table></div></div>";
   }
   document.getElementById("meals-container").innerHTML=html;
 
